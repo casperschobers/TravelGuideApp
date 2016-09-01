@@ -9827,3 +9827,12 @@ a.button {
   text-transform: uppercase;
   font-size: 12px;
   font-weight: bold; }
+
+.platform-ios .search-box {
+  padding: 10px;
+  margin: -10px -10px 0 -10px;
+  background-color: #CCCBD0; }
+  .platform-ios .search-box .item-search {
+    border-radius: 5px; }
+  .platform-ios .search-box input[type=search] {
+    height: 20px; }

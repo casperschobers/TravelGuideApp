@@ -25,17 +25,32 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
   margin-top: 1px;
   font-size: 12px;
 
-  .tab-item-active{
+  .tab-item-active {
     text-transform: uppercase;
     font-size: 12px;
     font-weight: bold;
   }
 }
 
-.tabs-striped > .tabs
-{
+.tabs-striped > .tabs {
   text-transform: uppercase;
   font-size: 12px;
   font-weight: bold;
+}
+
+.platform-ios {
+  .search-box {
+    padding: 10px;
+    margin: -10px -10px 0 -10px;
+    background-color: #CCCBD0;
+    .item-search {
+      border-radius: 5px;
+    }
+
+    input[type=search] {
+      height: 20px;
+
+    }
+  }
 }
 
