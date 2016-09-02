@@ -38,10 +38,22 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
   font-weight: bold;
 }
 
+.map{
+  width:100%;
+  height:250px;
+}
+
+.scroll-list{
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 307px;
+  bottom: 0;
+}
+
 .platform-ios {
   .search-box {
     padding: 10px;
-    margin: -10px -10px 0 -10px;
     background-color: #CCCBD0;
     .item-search {
       border-radius: 5px;

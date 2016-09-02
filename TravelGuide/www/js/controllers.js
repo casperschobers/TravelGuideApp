@@ -1,6 +1,43 @@
 angular.module('starter.controllers', [])
 
-.controller('MapCtrl', function($scope) {
+.controller('MapCtrl', function($scope, $cordovaGeolocation) {
+
+  $scope.SearchSubmit = function () {
+    var posOptions = {timeout: 10000, enableHighAccuracy: true};
+    $cordovaGeolocation
+      .getCurrentPosition(posOptions)
+      .then(function (position) {
+        var lat  = position.coords.latitude;
+        var long = position.coords.longitude;
+        var latLng = new plugin.google.maps.LatLng(lat,long);
+        var div = document.getElementById("map_canvas");
+        var map = plugin.google.maps.Map.getMap(div);
+        map.addEventListener(plugin.google.maps.event.MAP_READY, function() {
+
+          map.addMarker({
+            'position': latLng,
+            'title': "Current location"
+          }, function(marker) {
+
+            marker.showInfoWindow();
+
+          });
+          map.moveCamera({
+            'target': latLng,
+            'zoom': 17,
+            'tilt': 30
+          });
+
+        });
+        alert(lat + "+" + long);
+
+      }, function(err) {
+        // error
+        console.log(err);
+      });
+    cordova.plugins.Keyboard.close();
+  }
+
 })
 
 .controller('PlacesCtrl', function($scope, Chats) {
