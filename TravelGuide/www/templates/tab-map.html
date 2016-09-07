@@ -11,23 +11,8 @@
     <div class="map" id="map_canvas"></div>
     <ion-scroll direction="y" class="scroll-list">
       <ion-list>
-        <ion-item>
-          Hello, 1!
-        </ion-item>
-        <ion-item>
-          Hello, 2!
-        </ion-item>
-        <ion-item>
-          Hello, 3!
-        </ion-item>
-        <ion-item>
-          Hello, 4!
-        </ion-item>
-        <ion-item>
-          Hello, 5!
-        </ion-item>
-        <ion-item>
-          Hello, 6!
+        <ion-item ng-repeat="item in nearby">
+          {{item.title}}
         </ion-item>
       </ion-list>
     </ion-scroll>
