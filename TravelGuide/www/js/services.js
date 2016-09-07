@@ -52,4 +52,14 @@ angular.module('starter.services', [])
       return null;
     }
   };
-});
+})
+
+  .service('Placeswiki', function($http) {
+    // Might use a resource here that returns a JSON array
+
+    this.getPlaces =  function (lat, lon) {
+      return $http.get('https://en.wikipedia.org/w/api.php?action=query&list=geosearch&gsradius=10000&gscoord=' + lat + '|' + lon + '&format=json&gslimit=20&gsprop=type|country&gsprimary=all').then(function (response) {
+        return response.data.query.geosearch;
+      });
+    }
+  });
