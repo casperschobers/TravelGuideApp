@@ -49,14 +49,14 @@ angular.module('starter.controllers', [])
   //$scope.$on('$ionicView.enter', function(e) {
   //});
 
-  $scope.chats = Places.all();
-  $scope.remove = function(chat) {
-    Places.remove(chat);
+  $scope.places = Places.all();
+  $scope.remove = function(place) {
+    Places.remove(place);
   };
 })
 
 .controller('PlacesDetailCtrl', function($scope, $stateParams, Places) {
-  $scope.chat = Places.get($stateParams.placeId);
+  $scope.place = Places.get($stateParams.placeId);
 })
 
 .controller('SettingsCtrl', function($scope) {
