@@ -6,27 +6,27 @@ angular.module('starter.services', [])
   // Some fake testing data
   var places = [{
     id: 0,
-    name: 'Ben Sparrow',
+    name: 'Al-Fourqaan mosque',
     lastText: 'You on your way?',
     face: 'img/ben.png'
   }, {
     id: 1,
-    name: 'Max Lynx',
+    name: 'Eindhoven University of Technology',
     lastText: 'Hey, it\'s me',
     face: 'img/max.png'
   }, {
     id: 2,
-    name: 'Adam Bradleyson',
+    name: 'De Karpendonkse Hoeve',
     lastText: 'I should buy a boat',
     face: 'img/adam.jpg'
   }, {
     id: 3,
-    name: 'Perry Governor',
+    name: 'Catharina Ziekenhuis',
     lastText: 'Look at my mukluks!',
     face: 'img/perry.png'
   }, {
     id: 4,
-    name: 'Mike Harrington',
+    name: 'Effenaar',
     lastText: 'This is wicked good ice cream.',
     face: 'img/mike.png'
   }];
