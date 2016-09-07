@@ -2,9 +2,9 @@
   <ion-content>
     <ion-list>
       <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="place in places" type="item-text-wrap" href="#/tab/places/{{place.id}}">
-        <img ng-src="{{place.face}}">
+        <img ng-src="{{place.image}}">
         <h2>{{place.name}}</h2>
-        <p>{{place.lastText}}</p>
+        <p>{{place.details}}</p>
         <i class="icon ion-chevron-right icon-accessory"></i>
 
         <ion-option-button class="button-assertive" ng-click="remove(chat)">
