@@ -9,7 +9,6 @@ angular.module('starter.controllers', [])
 
   $scope.savePlace = function (place) {
     LocalPlaces.add(place);
-    alert(place.title);
   }
 
   ionic.Platform.ready(function(){
@@ -51,11 +50,14 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('PlacesCtrl', function($scope, Places) {
+.controller('PlacesCtrl', function($scope, LocalPlaces) {
 
- $scope.places = Places.all();
+ $scope.places = LocalPlaces.all();
+
+
+
   $scope.remove = function(place) {
-    Places.remove(place);
+    LocalPlaces.remove(place);
   };
 
 })
@@ -64,14 +66,17 @@ angular.module('starter.controllers', [])
   $scope.place = Places.get($stateParams.placeId);
 })
 
-.controller('SettingsCtrl', function($scope, LocalPlaces) {
+.controller('SettingsCtrl', function($scope, LocalPlaces, $cordovaDialogs) {
   $scope.settings = {
     enableFriends: true
   };
 
   $scope.emptyLocalPlaces = function () {
-    alert('empty');
-    LocalPlaces.empty();
-   
+    $cordovaDialogs.confirm('Are you sure you want to delete all your saved places?', 'Delete My Places', ['Ok','Cancel'])
+      .then(function(buttonIndex) {
+        if (buttonIndex == 1){
+          LocalPlaces.empty();
+        }
+      });
   }
 });

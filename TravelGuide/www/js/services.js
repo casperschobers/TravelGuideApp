@@ -73,7 +73,7 @@ angular.module('starter.services', [])
       $localStorage.localPlaces = [];
     }
     return {
-      getAll: _getAll,
+      all: _getAll,
       add: _add,
       remove: _remove,
       empty: _empty
