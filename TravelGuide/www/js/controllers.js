@@ -1,61 +1,77 @@
 angular.module('starter.controllers', [])
 
-.controller('MapCtrl', function($scope, $cordovaGeolocation, Placeswiki) {
+.controller('MapCtrl', function($scope, $cordovaGeolocation, Placeswiki, LocalPlaces) {
 
   $scope.SearchSubmit = function () {
-    var posOptions = {timeout: 10000, enableHighAccuracy: true};
-    $cordovaGeolocation
-      .getCurrentPosition(posOptions)
-      .then(function (position) {
-        var lat  = position.coords.latitude;
-        var lon = position.coords.longitude;
-        Placeswiki.getPlaces(lat,lon).then(function (places) {
-          $scope.nearby = places;
-        });
-        var latLng = new plugin.google.maps.LatLng(lat,lon);
-        var div = document.getElementById("map_canvas");
-        var map = plugin.google.maps.Map.getMap(div);
-        map.addEventListener(plugin.google.maps.event.MAP_READY, function() {
 
-          map.addMarker({
-            'position': latLng,
-            'title': "Current location"
-          }, function(marker) {
-
-            marker.showInfoWindow();
-
-          });
-          map.moveCamera({
-            'target': latLng,
-            'zoom': 17,
-            'tilt': 30
-          });
-
-        });
-      }, function(err) {
-        // error
-        console.log(err);
-      });
     cordova.plugins.Keyboard.close();
   }
+
+  $scope.savePlace = function (place) {
+    LocalPlaces.add(place);
+    alert(place.title);
+  }
+
+  ionic.Platform.ready(function(){
+
+  var posOptions = {timeout: 10000, enableHighAccuracy: true};
+  $cordovaGeolocation
+    .getCurrentPosition(posOptions)
+    .then(function (position) {
+      var lat  = position.coords.latitude;
+      var lon = position.coords.longitude;
+      Placeswiki.getPlaces(lat,lon).then(function (places) {
+        $scope.nearby = places;
+      });
+      var latLng = new plugin.google.maps.LatLng(lat,lon);
+      var div = document.getElementById("map_canvas");
+      var map = plugin.google.maps.Map.getMap(div);
+      map.addEventListener(plugin.google.maps.event.MAP_READY, function() {
+
+        map.addMarker({
+          'position': latLng,
+          'title': "Current location"
+        }, function(marker) {
+
+          marker.showInfoWindow();
+
+        });
+        map.moveCamera({
+          'target': latLng,
+          'zoom': 17,
+          'tilt': 30
+        });
+
+      });
+    }, function(err) {
+      // error
+      console.log(err);
+    });
+  })
 
 })
 
 .controller('PlacesCtrl', function($scope, Places) {
-  
+
  $scope.places = Places.all();
   $scope.remove = function(place) {
     Places.remove(place);
   };
-  
+
 })
 
 .controller('PlacesDetailCtrl', function($scope, $stateParams, Places) {
   $scope.place = Places.get($stateParams.placeId);
 })
 
-.controller('SettingsCtrl', function($scope) {
+.controller('SettingsCtrl', function($scope, LocalPlaces) {
   $scope.settings = {
     enableFriends: true
   };
+
+  $scope.emptyLocalPlaces = function () {
+    alert('empty');
+    LocalPlaces.empty();
+   
+  }
 });
