@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('MapCtrl', function($scope, $cordovaGeolocation, Placeswiki, LocalPlaces) {
+.controller('MapCtrl', function($scope, $cordovaGeolocation, Placeswiki, LocalPlaces, $ionicListDelegate) {
 
   $scope.SearchSubmit = function () {
 
@@ -9,10 +9,10 @@ angular.module('starter.controllers', [])
 
   $scope.savePlace = function (place) {
     LocalPlaces.add(place);
+    $ionicListDelegate.closeOptionButtons();
   }
 
   ionic.Platform.ready(function(){
-
   var posOptions = {timeout: 10000, enableHighAccuracy: true};
   $cordovaGeolocation
     .getCurrentPosition(posOptions)
@@ -21,6 +21,8 @@ angular.module('starter.controllers', [])
       var lon = position.coords.longitude;
       Placeswiki.getPlaces(lat,lon).then(function (places) {
         $scope.nearby = places;
+      }, function (err) {
+        $scope.nearbyerror = true;
       });
       var latLng = new plugin.google.maps.LatLng(lat,lon);
       var div = document.getElementById("map_canvas");
@@ -67,9 +69,9 @@ angular.module('starter.controllers', [])
 })
 
 .controller('SettingsCtrl', function($scope, LocalPlaces, $cordovaDialogs) {
-  $scope.settings = {
-    enableFriends: true
-  };
+ $scope.syncPlaces = function () {
+
+ }
 
   $scope.emptyLocalPlaces = function () {
     $cordovaDialogs.confirm('Are you sure you want to delete all your saved places?', 'Delete My Places', ['Ok','Cancel'])
