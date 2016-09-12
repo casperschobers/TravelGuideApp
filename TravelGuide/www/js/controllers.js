@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-  .controller('MapCtrl', function ($scope, $cordovaGeolocation, Placeswiki, LocalPlaces, $ionicListDelegate) {
+  .controller('MapCtrl', function ($scope, $cordovaGeolocation, Placeswiki, LocalPlaces, $ionicListDelegate, PlacesApi) {
 
     $scope.SearchSubmit = function () {
 
@@ -9,6 +9,7 @@ angular.module('starter.controllers', [])
 
     $scope.savePlace = function (place) {
       LocalPlaces.add(place);
+      PlacesApi.addPlace(place);
       $ionicListDelegate.closeOptionButtons();
     }
 

@@ -44,4 +44,25 @@ angular.module('starter.services', [])
         return response.data.query.geosearch;
       });
     }
+  })
+
+  .service('PlacesApi', function ($http) {
+    var url = 'http://192.168.2.14:8000/api/places/add'
+    var config = {
+      headers : {
+        'Content-Type': 'application/json'
+      }
+    }
+
+    this.addPlace = function (place) {
+      $http.post(url, place, config)
+        .then(
+          function(response){
+            alert(response.data.status);
+          },
+          function(response){
+            alert(response.data.error);
+          }
+        );
+    }
   });
