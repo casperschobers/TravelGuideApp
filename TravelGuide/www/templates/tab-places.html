@@ -1,16 +1,16 @@
 <ion-view view-title="My Places">
   <ion-content>
     <ion-list>
-      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="place in places" type="item-text-wrap" href="#/tab/places/{{place.id}}">
-        <img ng-src="{{place.image}}">
-        <h2>{{place.name}}</h2>
-        <p>{{place.details}}</p>
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="place in places" type="item-text-wrap" href="#/tab/places/{{place.pageid}}">
+        <img ng-if="place.image" ng-src="{{place.image}}">
+        <img ng-if="!place.image" src="img/poi-default.png">
+        <h2>{{place.title}}</h2>
         <i class="icon ion-chevron-right icon-accessory"></i>
-
-        <ion-option-button class="button-assertive" ng-click="remove(chat)">
+        <ion-option-button class="button-assertive" ng-click="remove(place)">
           Delete
         </ion-option-button>
       </ion-item>
     </ion-list>
+    <p ng-if="places.length == 0">There are no saved places!</p>
   </ion-content>
 </ion-view>
