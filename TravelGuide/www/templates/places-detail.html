@@ -4,11 +4,12 @@
   The FriendsCtrl pulls data from the Friends service (service.js)
   The Friends service returns an array of friend data
 -->
-<ion-view view-title="{{place.name}}">
+<ion-view view-title="{{place.title}}">
   <ion-content class="padding">
     <img ng-src="{{place.image}}" style="width: 64px; height: 64px">
     <p>
       {{place.details}}
+      <a href="#" ng-click="openURL('https://nl.m.wikipedia.org/?curid={{place.pageid}}')">{{place.title}} op Wikipedia</a>
     </p>
   </ion-content>
 </ion-view>

@@ -64,8 +64,28 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('PlacesDetailCtrl', function($scope, $stateParams, Places) {
-  $scope.place = Places.get($stateParams.placeId);
+.controller('PlacesDetailCtrl', function($scope, $stateParams, LocalPlaces, $cordovaInAppBrowser) {
+  $scope.openURL = function(url) {
+    var options = {
+      location: 'no',
+      clearcache: 'yes',
+      presentationstyle: 'formsheet',
+      closebuttoncaption: 'Close',
+      toolbarposition: 'top'
+    };
+
+    document.addEventListener("deviceready", function () {
+      $cordovaInAppBrowser.open(url, '_blank', options)
+        .then(function(event) {
+          // success
+        })
+        .catch(function(event) {
+          Console.log(event);
+        });
+
+    }, false);
+  }
+  $scope.place = LocalPlaces.get($stateParams.placeId);
 })
 
 .controller('SettingsCtrl', function($scope, LocalPlaces, $cordovaDialogs) {
