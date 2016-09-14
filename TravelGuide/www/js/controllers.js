@@ -74,7 +74,7 @@ angular.module('starter.controllers', [])
 
   })
 
-  .controller('PlacesDetailCtrl', function ($scope, $stateParams, LocalPlaces, $cordovaInAppBrowser) {
+  .controller('PlacesDetailCtrl', function ($scope, $stateParams, LocalPlaces, $cordovaInAppBrowser, $cordovaImagePicker, $cordovaFileTransfer) {
     $scope.openURL = function (url) {
       var options = {
         location: 'no',
@@ -95,6 +95,35 @@ angular.module('starter.controllers', [])
       }, false);
     }
     $scope.place = LocalPlaces.get($stateParams.placeId);
+
+    $scope.pickImage = function () {
+      var options = {
+        maximumImagesCount: 10,
+        width: 800,
+        quality: 80
+      };
+
+      $cordovaImagePicker.getPictures(options)
+        .then(function (results) {
+          for (var i = 0; i < results.length; i++) {
+            var options = new FileUploadOptions();
+            var params = {};
+            params.placeid = $scope.place.pageid;
+            options.params = params;
+            console.log('Image URI: ' + results[i]);
+            //$scope.place.images.push(results[i]);
+            $cordovaFileTransfer.upload("http://145.93.32.142:8000/api/places/photos/add", results[i], options).then(function(result) {
+                console.log(result);
+              }, function(err) {
+                console.log(err);
+              }, function (progress) {
+                console.log(progress);
+              });
+          }
+        }, function(error) {
+          // error getting photos
+        });
+    }
   })
 
   .controller('SettingsCtrl', function ($scope, LocalPlaces, $cordovaDialogs) {
