@@ -8,9 +8,12 @@ angular.module('starter.controllers', [])
     }
 
     $scope.savePlace = function (place) {
-      LocalPlaces.add(place);
-      PlacesApi.addPlace(place);
-      $ionicListDelegate.closeOptionButtons();
+      Placeswiki.getPlaceInfo(place.pageid, place.title).then(function(details) {
+        place.description = details;
+        LocalPlaces.add(place);
+        PlacesApi.addPlace(place);
+        $ionicListDelegate.closeOptionButtons();
+      });
     }
 
     ionic.Platform.ready(function () {
