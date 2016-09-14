@@ -10,6 +10,12 @@
     <p>
       {{place.details}}
       <a href="#" ng-click="openURL('https://nl.m.wikipedia.org/?curid={{place.pageid}}')">{{place.title}} op Wikipedia</a>
+      <button class="button button-royal" ng-click="pickImage()">
+        Pick images
+      </button>
+      <div ng-repeat="img in place.images">
+        <img src="{{img}}" width="100px"/>
+      </div>
     </p>
   </ion-content>
 </ion-view>
