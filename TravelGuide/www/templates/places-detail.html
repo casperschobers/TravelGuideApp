@@ -11,14 +11,17 @@
       {{place.description}}
     </p>
     <p>
-      <a href="#" ng-click="openURL('https://nl.m.wikipedia.org/?curid={{place.pageid}}')">{{place.title}} op Wikipedia</a>
-      <h2>My photos</h2>
-      <button class="button button-positive icon ion-images" ng-click="pickImage()">
-
-      </button>
-      <div ng-repeat="img in place.images">
-        <img src="{{img}}" width="100px"/>
-      </div>
+      <a href="#" ng-click="openURL('https://nl.m.wikipedia.org/?curid={{place.pageid}}')">{{place.title}} op
+        Wikipedia</a>
     </p>
+    <h2>My photos</h2>
+    <button class="button button-positive icon ion-images" ng-click="pickImage()">
+
+    </button>
+    <div class="row responsive-sm">
+      <div ng-repeat="img in place.images">
+        <img src="http://145.93.32.208:8000/{{img}}" width="100%"/>
+      </div>
+    </div>
   </ion-content>
 </ion-view>

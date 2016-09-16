@@ -12,6 +12,10 @@ angular.module('starter.services', [])
     var _add = function (place) {
       _getAll().push(place);
     }
+
+    var _addAtIndex = function(place, index) {
+      _getAll().splice(index, 0, place);
+    }
     var _remove = function (place) {
       _getAll().splice($localStorage.localPlaces.indexOf(place), 1);
     }
@@ -26,12 +30,20 @@ angular.module('starter.services', [])
       }
       return null;
     }
+    var _addPhoto = function (placeId, image) {
+      var place = _get(placeId);
+      var previousIndex = $localStorage.localPlaces.indexOf(place);
+      _remove(place);
+      place.images.push(image);
+      _addAtIndex(place, previousIndex);
+    }
     return {
       all: _getAll,
       add: _add,
       remove: _remove,
       empty: _empty,
-      get: _get
+      get: _get,
+      addPhoto: _addPhoto
     };
   })
 

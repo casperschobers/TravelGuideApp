@@ -8,7 +8,7 @@ angular.module('starter.controllers', [])
     }
 
     $scope.savePlace = function (place) {
-      Placeswiki.getPlaceInfo(place.pageid, place.title).then(function(details) {
+      Placeswiki.getPlaceInfo(place.pageid, place.title).then(function (details) {
         place.description = details;
         place.images = [];
         LocalPlaces.add(place);
@@ -113,16 +113,16 @@ angular.module('starter.controllers', [])
             options.params = params;
             console.log('Image URI: ' + results[i]);
             //$scope.place.images.push(results[i]);
-            $cordovaFileTransfer.upload("http://145.93.32.208:8000/api/places/photos/add", results[i], options).then(function(result) {
-                console.log(result);
-                
-              }, function(err) {
-                console.log(err);
-              }, function (progress) {
-                console.log(progress);
-              });
+            $cordovaFileTransfer.upload("http://145.93.32.208:8000/api/places/photos/add", results[i], options).then(function (result) {
+              console.log(result);
+              LocalPlaces.addPhoto($scope.place.pageid, JSON.parse(result.response).url);
+            }, function (err) {
+              console.log(err);
+            }, function (progress) {
+              console.log(progress);
+            });
           }
-        }, function(error) {
+        }, function (error) {
           // error getting photos
         });
     }
