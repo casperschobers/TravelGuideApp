@@ -53,7 +53,7 @@ angular.module('starter.services', [])
   })
 
   .service('PlacesApi', function ($http) {
-    var url = 'http://145.93.32.142:8000/api/places/add';
+    var url = 'http://145.93.32.208:8000/api/places/add';
     var config = {
       headers : {
         'Content-Type': 'application/json'
