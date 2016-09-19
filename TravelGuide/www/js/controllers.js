@@ -113,7 +113,7 @@ angular.module('starter.controllers', [])
             options.params = params;
             console.log('Image URI: ' + results[i]);
             //$scope.place.images.push(results[i]);
-            $cordovaFileTransfer.upload("http://145.93.32.208:8000/api/places/photos/add", results[i], options).then(function (result) {
+            $cordovaFileTransfer.upload("http://145.93.33.173:8000/api/places/photos/add", results[i], options).then(function (result) {
               console.log(result);
               LocalPlaces.addPhoto($scope.place.pageid, JSON.parse(result.response).url);
             }, function (err) {
@@ -131,6 +131,7 @@ angular.module('starter.controllers', [])
       var options = {
         destinationType: Camera.DestinationType.FILE_URI,
         sourceType: Camera.PictureSourceType.CAMERA,
+        correctOrientation:true,
       };
 
       $cordovaCamera.getPicture(options).then(function(imageURI) {
@@ -139,7 +140,7 @@ angular.module('starter.controllers', [])
         params.placeid = $scope.place.pageid;
         options.params = params;
 
-        $cordovaFileTransfer.upload("http://145.93.32.208:8000/api/places/photos/add", imageURI, options).then(function (result) {
+        $cordovaFileTransfer.upload("http://145.93.33.173:8000/api/places/photos/add", imageURI, options).then(function (result) {
           console.log(result);
           LocalPlaces.addPhoto($scope.place.pageid, JSON.parse(result.response).url);
         }, function (err) {
